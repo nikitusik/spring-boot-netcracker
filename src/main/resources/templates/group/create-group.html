@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create group</title>
+</head>
+<body>
+<form action="#" th:action="@{/groups/create}" th:object="${group}" method="post">
+    <label for="number">Number of group</label>
+    <input type="text" th:field="*{number}" id="number" placeholder="Enter number">
+    <br>
+    <label for="faculty">Faculty of group</label>
+    <input type="text" th:field="*{faculty}" id="faculty" placeholder="Enter faculty">
+    <br>
+    <input type="submit" value="Create Group">
+</form>
+</body>
+</html>

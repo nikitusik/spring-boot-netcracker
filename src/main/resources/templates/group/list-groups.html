@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>List groups</title>
+</head>
+<body>
+    <div th:switch="${groups}">
+        <h2 th:case="null">No groups found!</h2>
+        <div th:case="*">
+            <h2>Groups</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Faculty</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="group : ${groups}">
+                    <td th:text="${group.number}"></td>
+                    <td th:text="${group.faculty}"></td>
+                    <td><a th:href="@{/groups/delete/{id}(id=${group.id})}">Delete</a></td>
+                    <td><a th:href="@{/groups/update/{id}(id=${group.id})}">Update</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="/groups/create">Create group</a></p>
+        <p><a href="/">Main page</a></p>
+    </div>
+</body>
+</html>

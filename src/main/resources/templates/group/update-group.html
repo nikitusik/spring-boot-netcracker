@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Group</title>
+</head>
+<body>
+<form action="#" th:action="@{/groups/update}" th:object="${group}" method="post">
+    <label for="id">ID</label>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+    <br/>
+    <label for="number">Number of group</label>
+    <input type="text" th:field="*{number}" id="number" placeholder="Enter number">
+    <br>
+    <label for="faculty">Faculty of group</label>
+    <input type="text" th:field="*{faculty}" id="faculty" placeholder="Enter faculty">
+    <br>
+    <input type="submit" value="Update Group">
+</form>
+</body>
+</html>
