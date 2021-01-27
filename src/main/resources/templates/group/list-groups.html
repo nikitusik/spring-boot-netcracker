@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>List groups</title>
 </head>
 <body>
+<header th:insert = "blocks/header::header"></header>
+</header>
     <div th:switch="${groups}">
         <h2 th:case="null">No groups found!</h2>
         <div th:case="*">
@@ -29,5 +32,6 @@
         <p><a href="/groups/create">Create group</a></p>
         <p><a href="/">Main page</a></p>
     </div>
+<footer th:insert = "blocks/footer::footer"></footer>
 </body>
 </html>

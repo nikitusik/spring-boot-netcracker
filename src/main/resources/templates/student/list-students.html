@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>List students</title>
 </head>
 <body>
+<header th:insert = "blocks/header::header"></header>
+</header>
 <div th:switch="${students}">
     <h2 th:case="null">No students found!</h2>
     <div th:case="*">
@@ -31,5 +34,6 @@
     <p><a href="/students/create">Create student</a></p>
     <p><a href="/">Main page</a></p>
 </div>
+<footer th:insert = "blocks/footer::footer"></footer>
 </body>
 </html>

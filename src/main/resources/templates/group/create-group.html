@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>Create group</title>
 </head>
 <body>
+<header th:insert = "blocks/header::header"></header>
 <form action="#" th:action="@{/groups/create}" th:object="${group}" method="post">
     <label for="number">Number of group</label>
     <input type="text" th:field="*{number}" id="number" placeholder="Enter number">
@@ -14,5 +16,6 @@
     <br>
     <input type="submit" value="Create Group">
 </form>
+<footer th:insert = "blocks/footer::footer"></footer>
 </body>
 </html>
