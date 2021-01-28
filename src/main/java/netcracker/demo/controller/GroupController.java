@@ -32,7 +32,9 @@ public class GroupController {
     }
 
     @PostMapping("/create")
-    public String createGroup(Group group){
+    public String createGroup(Model model, @RequestParam String number,
+                              @RequestParam String faculty){
+        Group group = new Group(number,faculty);
         groupService.save(group);
         return "redirect:/groups/";
     }

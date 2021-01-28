@@ -7,8 +7,15 @@
 </head>
 <body>
 <header th:insert = "blocks/header::header"></header>
-</header>
-<h1>Create student</h1>
-<footer th:insert = "blocks/footer::footer"></footer>
+<form action="#" th:action="@{/students/create}" th:object="${student}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Enter name">
+    <br>
+    <label for="dateOfEnrollment">Date of enrollment</label>
+    <input type="date" th:field="*{dateOfEnrollment}" id="dateOfEnrollment" placeholder="Enter date">
+    <br>
+    <input type="submit" value="Create Student">
+</form>
+<footer th:insert="blocks/footer::footer"></footer>
 </body>
 </html>

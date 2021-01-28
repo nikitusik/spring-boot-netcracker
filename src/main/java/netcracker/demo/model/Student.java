@@ -25,6 +25,11 @@ public class Student {
     public Student() {
     }
 
+    public Student(String name, LocalDate dateOfEnrollment) {
+        this.name = name;
+        this.dateOfEnrollment = dateOfEnrollment;
+    }
+
     public int getId() {
         return id;
     }
