@@ -2,24 +2,25 @@ package netcracker.demo.controller;
 
 import netcracker.demo.model.Group;
 import netcracker.demo.model.Student;
+import netcracker.demo.service.GroupService;
 import netcracker.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 @RequestMapping("/students/")
 public class StudentController {
     private final StudentService studentService;
+    private final GroupService groupService;
 
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, GroupService groupService) {
         this.studentService = studentService;
+        this.groupService = groupService;
     }
 
     @GetMapping("/")
@@ -35,9 +36,9 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public String createStudent(Model model, @RequestParam String name,
-                                @RequestParam LocalDate dateOfEnrollment){
-        Student student = new Student(name,dateOfEnrollment);
+    public String createStudent(Student student){
+        Group group = groupService.findByNumber(student.getGroup().getNumber());
+        student.setGroup(group);
         studentService.save(student);
         return "redirect:/students/";
     }
@@ -58,6 +59,8 @@ public class StudentController {
 
     @PostMapping("/update")
     public String updateStudent(Student student){
+        Group group = groupService.findByNumber(student.getGroup().getNumber());
+        student.setGroup(group);
         studentService.save(student);
         return "redirect:/students/";
     }
