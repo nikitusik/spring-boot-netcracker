@@ -49,9 +49,4 @@ public class Group {
         return "Номер группы: " + number +
                 ", Факультет: " + faculty;
     }
-
-    public Group(String number, String faculty) {
-        this.number = number;
-        this.faculty = faculty;
-    }
 }
