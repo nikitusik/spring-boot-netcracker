@@ -18,7 +18,7 @@ public class Student {
     @Column(name = "date_of_enrollment")
     private Date dateOfEnrollment;
 
-    @ManyToOne(optional = false, cascade = {CascadeType.ALL})
+    @ManyToOne(optional = false)
     @JoinColumn(name = "group_id")
     private Group group;
 
