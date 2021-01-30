@@ -33,6 +33,12 @@
     </div>
     <p><a href="/students/create">Create student</a></p>
     <p><a href="/">Main page</a></p>
+
+    <!--Надо как то связать поле для ввода с
+        ссылкой если это возможно-->
+    <label for="number">Group</label>
+    <input type="text" id="number" name="number" placeholder="Enter number of group">
+    <p><a href="/students/search/{number}">Search</a></p>
 </div>
 <footer th:insert = "blocks/footer::footer"></footer>
 </body>

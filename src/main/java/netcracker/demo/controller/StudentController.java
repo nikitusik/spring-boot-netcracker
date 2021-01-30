@@ -64,4 +64,11 @@ public class StudentController {
         studentService.save(student);
         return "redirect:/students/";
     }
+
+    @GetMapping("/search/{number}")
+    public String searchStudentsByGroup(@PathVariable("number") String number, Model model){
+        List<Student> students = studentService.findStudentsByGroupNumber(number);
+        model.addAttribute("students", students);
+        return "student/list-students";
+    }
 }
