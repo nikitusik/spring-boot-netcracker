@@ -65,10 +65,15 @@ public class StudentController {
         return "redirect:/students/";
     }
 
-    @GetMapping("/search/{number}")
-    public String searchStudentsByGroup(@PathVariable("number") String number, Model model){
+    @PostMapping("/search")
+    public String searchStudentsByGroup(String number, Model model){
         List<Student> students = studentService.findStudentsByGroupNumber(number);
         model.addAttribute("students", students);
         return "student/list-students";
+    }
+
+    @GetMapping("/search")
+    public String searchStudentsByGroupForm(Group group, Model model){
+        return "student/search-students";
     }
 }
