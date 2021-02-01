@@ -24,19 +24,21 @@ public class StudentController {
     }
 
     @GetMapping("/")
-    public String showStudents(Model model){
+    public String showStudents(Model model) {
         List<Student> students = studentService.findAll();
         model.addAttribute("students", students);
         return "student/list-students";
     }
 
     @GetMapping("/create")
-    public String createStudentForm(Student student){
+    public String createStudentForm(Student student, Model model) {
+        List<Object> numbers = groupService.findNumbersAllGroups();
+        model.addAttribute("numbers", numbers);
         return "student/create-student";
     }
 
     @PostMapping("/create")
-    public String createStudent(Student student){
+    public String createStudent(Student student) {
         Group group = groupService.findByNumber(student.getGroup().getNumber());
         student.setGroup(group);
         studentService.save(student);
@@ -44,21 +46,23 @@ public class StudentController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable("id") Integer id){
+    public String deleteStudent(@PathVariable("id") Integer id) {
         Student student = studentService.findById(id);
         studentService.delete(student);
         return "redirect:/students/";
     }
 
     @GetMapping("/update/{id}")
-    public String updateStudentForm(@PathVariable("id") Integer id, Model model){
+    public String updateStudentForm(@PathVariable("id") Integer id, Model model) {
         Student student = studentService.findById(id);
+        List<Object> numbers = groupService.findNumbersAllGroups();
         model.addAttribute("student", student);
+        model.addAttribute("numbers", numbers);
         return "student/update-student";
     }
 
     @PostMapping("/update")
-    public String updateStudent(Student student){
+    public String updateStudent(Student student) {
         Group group = groupService.findByNumber(student.getGroup().getNumber());
         student.setGroup(group);
         studentService.save(student);
@@ -66,14 +70,18 @@ public class StudentController {
     }
 
     @PostMapping("/search")
-    public String searchStudentsByGroup(String number, Model model){
-        List<Student> students = studentService.findStudentsByGroupNumber(number);
+    public String searchStudent(Student student, Model model) {
+        String name = student.getName();
+        String number = student.getGroup().getNumber();
+        List<Student> students = studentService.findStudentsByNameAndGroupNumber(name, number);
         model.addAttribute("students", students);
         return "student/list-students";
     }
 
     @GetMapping("/search")
-    public String searchStudentsByGroupForm(Group group, Model model){
+    public String searchStudentsByGroupForm(Student student, Model model) {
+        List<Object> numbers = groupService.findNumbersAllGroups();
+        model.addAttribute("numbers", numbers);
         return "student/search-students";
     }
 }
