@@ -17,6 +17,7 @@
             <tr>
                 <th>Name</th>
                 <th>Group</th>
+                <th>Faculty</th>
                 <th>Date of enrollment</th>
             </tr>
             </thead>
@@ -24,30 +25,13 @@
             <tr th:each="student : ${students}">
                 <td th:text="${student.name}"></td>
                 <td th:text="${student.group.number}"></td>
+                <td th:text="${student.group.faculty}"></td>
                 <td th:text="${student.dateOfEnrollment}"></td>
-                <td><a th:href="@{/students/delete/{id}(id=${student.id})}">Delete</a></td>
-                <td><a th:href="@{/students/update/{id}(id=${student.id})}">Update</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/students/create">Create student</a></p>
     <p><a href="/groups/">Groups</a></p>
-    <p><a href="/students/search">Search student</a></p>
-    <p><a href="/">Main page</a></p>
-    <!--Надо как то связать поле для ввода с
-        ссылкой если это возможно
-    <form method="get">
-        <div th:with="number = '1'">
-            <label for="number">Group</label>
-            <input type="text" id="number" placeholder="Enter number of group">
-            <input type="submit" value="Search" th:href="@{/students/search/{number}(number=${number})}">
-        </div>
-    </form>
-
-    <div th:with="number='?'">
-        <p><a th:href="@{/students/search/{number}(number=${number})}">Search students</a></p>
-    </div>-->
 </div>
 <footer th:insert = "blocks/footer::footer"></footer>
 </body>

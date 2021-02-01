@@ -18,6 +18,12 @@
     <label for="faculty">Faculty of group</label>
     <input type="text" th:field="*{faculty}" id="faculty" placeholder="Enter faculty">
     <br>
+    <label for="yearOfCreate">Group creation year</label>
+    <input type="text" th:field="*{yearOfCreate}" id="yearOfCreate" placeholder="Enter year">
+    <br>
+    <label for="isArchive">Make the group archived</label>
+    <input type="checkbox" th:field="*{archive}" id="isArchive">
+    <br>
     <input type="submit" value="Update Group">
 </form>
 <footer th:insert = "blocks/footer::footer"></footer>

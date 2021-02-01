@@ -1,6 +1,7 @@
 package netcracker.demo.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "groups")
@@ -16,6 +17,12 @@ public class Group {
 
     @Column(name = "faculty")
     private String faculty;
+
+    @Column(name = "year_of_create")
+    private String yearOfCreate;
+
+    @Column(name = "is_archive")
+    private boolean archive;
 
     public Group() {
     }
@@ -42,6 +49,22 @@ public class Group {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    public String getYearOfCreate() {
+        return yearOfCreate;
+    }
+
+    public void setYearOfCreate(String yearOfCreate) {
+        this.yearOfCreate = yearOfCreate;
+    }
+
+    public boolean isArchive() {
+        return archive;
+    }
+
+    public void setArchive(boolean archive) {
+        this.archive = archive;
     }
 
     @Override

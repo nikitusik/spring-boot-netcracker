@@ -7,10 +7,15 @@
 </head>
 <body>
 <header th:insert = "blocks/header::header"></header>
-<form action="#" th:action="@{/students/search}" th:object="${group}" method="post">
-    <label for="group">Number of group</label>
-    <input type="text" id="group" th:field="*{number}" placeholder="Enter number of group">
-    <input type="submit" value="Search students">
+<form action="#" th:action="@{/students/search}" th:object="${student}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Enter name">
+    <br>
+    <select th:field="*{group.number}">
+        <option value="">Number of group</option>
+        <option th:each="number : ${numbers}" th:value="${number}" th:text="${number}"></option>
+    </select>
+    <input type="submit" value="Search student">
 </form>
 <footer th:insert="blocks/footer::footer"></footer>
 </body>

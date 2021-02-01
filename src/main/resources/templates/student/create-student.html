@@ -14,8 +14,10 @@
     <label for="dateOfEnrollment">Date of enrollment</label>
     <input type="date" th:field="*{dateOfEnrollment}" id="dateOfEnrollment" placeholder="Enter date">
     <br>
-    <label for="group">Number of group</label>
-    <input type="text" th:field="*{group.number}" id="group" placeholder="Enter number of group">
+    <select th:field="*{group.number}">
+        <option value="">Number of group</option>
+        <option th:each="number : ${numbers}" th:value="${number}" th:text="${number}"></option>
+    </select>
     <input type="submit" value="Create Student">
 </form>
 <footer th:insert="blocks/footer::footer"></footer>
