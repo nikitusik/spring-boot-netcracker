@@ -2,14 +2,12 @@ package netcracker.demo.controller;
 
 import netcracker.demo.model.Group;
 import netcracker.demo.model.Student;
+import netcracker.demo.service.GroupService;
 import netcracker.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,10 +15,12 @@ import java.util.List;
 @RequestMapping("/students/")
 public class StudentController {
     private final StudentService studentService;
+    private final GroupService groupService;
 
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, GroupService groupService) {
         this.studentService = studentService;
+        this.groupService = groupService;
     }
 
     @GetMapping("/")
@@ -37,6 +37,8 @@ public class StudentController {
 
     @PostMapping("/create")
     public String createStudent(Student student){
+        Group group = groupService.findByNumber(student.getGroup().getNumber());
+        student.setGroup(group);
         studentService.save(student);
         return "redirect:/students/";
     }
@@ -57,7 +59,21 @@ public class StudentController {
 
     @PostMapping("/update")
     public String updateStudent(Student student){
+        Group group = groupService.findByNumber(student.getGroup().getNumber());
+        student.setGroup(group);
         studentService.save(student);
         return "redirect:/students/";
+    }
+
+    @PostMapping("/search")
+    public String searchStudentsByGroup(String number, Model model){
+        List<Student> students = studentService.findStudentsByGroupNumber(number);
+        model.addAttribute("students", students);
+        return "student/list-students";
+    }
+
+    @GetMapping("/search")
+    public String searchStudentsByGroupForm(Group group, Model model){
+        return "student/search-students";
     }
 }

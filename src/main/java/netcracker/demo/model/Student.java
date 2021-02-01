@@ -1,7 +1,7 @@
 package netcracker.demo.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Date;
 
 @Entity
 @Table(name = "students")
@@ -16,9 +16,9 @@ public class Student {
     private String name;
 
     @Column(name = "date_of_enrollment")
-    private LocalDate dateOfEnrollment;
+    private Date dateOfEnrollment;
 
-    @ManyToOne(optional = false, cascade = {CascadeType.ALL})
+    @ManyToOne(optional = false)
     @JoinColumn(name = "group_id")
     private Group group;
 
@@ -49,11 +49,11 @@ public class Student {
         this.group = group;
     }
 
-    public LocalDate getDateOfEnrollment() {
+    public Date getDateOfEnrollment() {
         return dateOfEnrollment;
     }
 
-    public void setDateOfEnrollment(LocalDate dateOfEnrollment) {
+    public void setDateOfEnrollment(Date dateOfEnrollment) {
         this.dateOfEnrollment = dateOfEnrollment;
     }
 

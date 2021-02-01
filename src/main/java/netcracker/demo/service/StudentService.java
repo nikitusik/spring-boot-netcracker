@@ -16,19 +16,23 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public List<Student> findAll(){
+    public List<Student> findAll() {
         return studentRepository.findAll();
     }
 
-    public Student findById(Integer id){
+    public Student findById(Integer id) {
         return studentRepository.findById(id).orElse(null);
     }
 
-    public void save(Student student){
+    public void save(Student student) {
         studentRepository.save(student);
     }
 
-    public void delete(Student student){
+    public void delete(Student student) {
         studentRepository.delete(student);
+    }
+
+    public List<Student> findStudentsByGroupNumber(String number) {
+        return studentRepository.findStudentsByGroup_Number(number);
     }
 }
