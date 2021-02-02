@@ -21,7 +21,7 @@
         <option value="">Number of group</option>
         <option th:each="number : ${numbers}" th:value="${number}" th:text="${number}"></option>
     </select>
-    <input type="submit" value="Update Student">
+    <input type="submit" class="py-1 btn btn-success" value="Update Student">
 </form>
 <footer th:insert = "blocks/footer::footer"></footer>
 </body>

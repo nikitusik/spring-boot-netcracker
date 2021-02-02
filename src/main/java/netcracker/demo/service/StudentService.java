@@ -35,6 +35,9 @@ public class StudentService {
     public List<Student> findStudentsByGroupNumber(String number) {
         return studentRepository.findStudentsByGroup_Number(number);
     }
+    public List<Student> findStudentsByName(String name){
+        return studentRepository.findStudentsByName(name);
+    }
 
     public List<Student> findStudentsByNameAndGroupNumber(String name, String number) {
         return studentRepository.findStudentsByNameAndGroup_Number(name, number);

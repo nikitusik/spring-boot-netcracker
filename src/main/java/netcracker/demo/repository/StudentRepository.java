@@ -9,5 +9,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     List<Student> findStudentsByGroup_Number(String number);
 
+    List<Student> findStudentsByName(String name);
+
     List<Student> findStudentsByNameAndGroup_Number(String name, String number);
 }

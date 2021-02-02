@@ -73,6 +73,16 @@ public class StudentController {
     public String searchStudent(Student student, Model model) {
         String name = student.getName();
         String number = student.getGroup().getNumber();
+        if (number.isEmpty() && !name.isEmpty()) {
+            List<Student> students = studentService.findStudentsByName(name);
+            model.addAttribute("students", students);
+            return "student/list-students";
+        }
+        if (name.isEmpty() && !number.isEmpty()) {
+            List<Student> students = studentService.findStudentsByGroupNumber(number);
+            model.addAttribute("students", students);
+            return "student/list-students";
+        }
         List<Student> students = studentService.findStudentsByNameAndGroupNumber(name, number);
         model.addAttribute("students", students);
         return "student/list-students";

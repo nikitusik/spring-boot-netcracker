@@ -26,18 +26,33 @@
                     <td th:text="${group.number}"></td>
                     <td th:text="${group.faculty}"></td>
                     <td th:text="${group.yearOfCreate}"></td>
-                    <td th:text="${group.archive}"></td>
-                    <td><a th:href="@{/groups/delete/{id}(id=${group.id})}">Delete</a></td>
-                    <td><a th:href="@{/groups/update/{id}(id=${group.id})}">Update</a></td>
-                    <td><a th:href="@{/groups/search/{id}(id=${group.id})}">Show</a></td>
+                    <div th:switch="${group.archive}">
+                        <div th:case=true>
+                            <td th:text="Archived"></td>
+                        </div>
+                            <div th:case=false>
+                                <td th:text="Really"></td>
+                            </div>
+                    </div>
+                    <td><a th:href="@{/groups/delete/{id}(id=${group.id})}" class="py-0 btn btn-primary">Delete</a></td>
+                    <td><a th:href="@{/groups/update/{id}(id=${group.id})}" class="py-0 btn btn-primary">Update</a></td>
+                    <td><a th:href="@{/groups/search/{id}(id=${group.id})}" class="py-0 btn btn-primary">Show</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <p><a href="/groups/create">Create group</a></p>
-        <p><a href="/students/">Students</a></p>
-        <p><a href="/">Main page</a></p>
     </div>
+        <br>
+        <a href="/groups/create" class="py-1 btn btn-primary">Create group</a>
+        <a href="/students/" class="py-1 btn btn-primary">Students</a>
+        <a href="/" class="py-1 btn btn-primary">Main page</a>
+
+
+
+       <!-- <p><a href="/groups/create">Create group</a></p>
+        <p><a href="/students/">Students</a></p>
+        <p><a href="/">Main page</a></p>-->
+
 <footer th:insert = "blocks/footer::footer"></footer>
 </body>
 </html>

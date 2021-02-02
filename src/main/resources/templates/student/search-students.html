@@ -15,7 +15,8 @@
         <option value="">Number of group</option>
         <option th:each="number : ${numbers}" th:value="${number}" th:text="${number}"></option>
     </select>
-    <input type="submit" value="Search student">
+    <!--<td><a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-secondary my-2">Delete</a></td>-->
+    <input type="submit" class="py-1 btn btn-success" value="Search student">
 </form>
 <footer th:insert="blocks/footer::footer"></footer>
 </body>

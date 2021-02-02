@@ -66,6 +66,6 @@ public class GroupController {
         String number = groupService.findById(id).getNumber();
         List<Student> students = studentService.findStudentsByGroupNumber(number);
         model.addAttribute("students", students);
-        return "group/list-students";
+        return "student/list-students";
     }
 }
