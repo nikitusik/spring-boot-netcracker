@@ -12,12 +12,14 @@
     <h2 th:case="true">No students found!</h2>
     <div th:case="false">
         <h2>Students</h2>
-        <table>
-            <thead>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
             <tr>
                 <th>Name</th>
                 <th>Group</th>
                 <th>Date of enrollment</th>
+                <th>Delete student</th>
+                <th>Update student</th>
             </tr>
             </thead>
             <tbody>
