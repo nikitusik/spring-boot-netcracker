@@ -7,8 +7,11 @@ import netcracker.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -38,8 +41,16 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public String createStudent(Student student) {
+    public String createStudent(@Valid Student student, BindingResult bindingResult, Model model) {
+        List<Object> numbers = groupService.findNumbersAllGroups();
         Group group = groupService.findByNumber(student.getGroup().getNumber());
+        if (group == null)
+            bindingResult.addError(new FieldError
+                    ("student", "group.number", "incorrect number group"));
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("numbers", numbers);
+            return "student/create-student";
+        }
         student.setGroup(group);
         studentService.save(student);
         return "redirect:/students/";
@@ -62,8 +73,16 @@ public class StudentController {
     }
 
     @PostMapping("/update")
-    public String updateStudent(Student student) {
+    public String updateStudent(@Valid Student student, BindingResult bindingResult, Model model) {
+        List<Object> numbers = groupService.findNumbersAllGroups();
         Group group = groupService.findByNumber(student.getGroup().getNumber());
+        if (group == null)
+            bindingResult.addError(new FieldError
+                    ("student", "group.number", "incorrect number group"));
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("numbers", numbers);
+            return "student/update-student";
+        }
         student.setGroup(group);
         studentService.save(student);
         return "redirect:/students/";
