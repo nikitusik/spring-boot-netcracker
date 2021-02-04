@@ -1,6 +1,7 @@
 package netcracker.demo.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 
 @Entity
@@ -12,12 +13,15 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty
     @Column(name = "number")
     private String number;
 
+    @NotEmpty
     @Column(name = "faculty")
     private String faculty;
 
+    @NotEmpty
     @Column(name = "year_of_create")
     private String yearOfCreate;
 

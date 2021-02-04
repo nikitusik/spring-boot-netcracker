@@ -7,8 +7,10 @@ import netcracker.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,7 +38,9 @@ public class GroupController {
     }
 
     @PostMapping("/create")
-    public String createGroup(Group group) {
+    public String createGroup(@Valid Group group, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "group/create-group";
         groupService.save(group);
         return "redirect:/groups/";
     }
@@ -56,7 +60,9 @@ public class GroupController {
     }
 
     @PostMapping("/update")
-    public String updateGroup(Group group) {
+    public String updateGroup(@Valid Group group, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "group/update-group";
         groupService.save(group);
         return "redirect:/groups/";
     }
