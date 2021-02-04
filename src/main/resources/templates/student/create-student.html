@@ -10,14 +10,18 @@
 <form action="#" th:action="@{/students/create}" th:object="${student}" method="post">
     <label for="name">Name</label>
     <input type="text" th:field="*{name}" id="name" placeholder="Enter name">
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
     <br>
     <label for="dateOfEnrollment">Date of enrollment</label>
     <input type="date" th:field="*{dateOfEnrollment}" id="dateOfEnrollment" placeholder="Enter date">
+    <div style="color:red" th:if="${#fields.hasErrors('dateOfEnrollment')}">Date Error</div>
     <br>
     <select th:field="*{group.number}">
         <option value="">Number of group</option>
         <option th:each="number : ${numbers}" th:value="${number}" th:text="${number}"></option>
     </select>
+    <div style="color:red" th:if="${#fields.hasErrors('group.number')}" th:errors="*{group.number}">Group Error</div>
+    <br>
     <input type="submit" class="py-1 btn btn-success" value="Create Student">
 </form>
 <footer th:insert="blocks/footer::footer"></footer>
