@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -39,6 +40,10 @@ public class GroupController {
 
     @PostMapping("/create")
     public String createGroup(@Valid Group group, BindingResult bindingResult) {
+        String year = group.getYearOfCreate();
+        String number = group.getNumber();
+        if(groupService.findByNumberAndYear(number, year)!=null)
+            groupErrorsForNumberAndYear(bindingResult);
         if (bindingResult.hasErrors())
             return "group/create-group";
         groupService.save(group);
@@ -60,6 +65,10 @@ public class GroupController {
 
     @PostMapping("/update")
     public String updateGroup(@Valid Group group, BindingResult bindingResult) {
+        String year = group.getYearOfCreate();
+        String number = group.getNumber();
+        if(groupService.findByNumberAndYear(number, year)!=null)
+            groupErrorsForNumberAndYear(bindingResult);
         if (bindingResult.hasErrors())
             return "group/update-group";
         groupService.save(group);
@@ -73,5 +82,12 @@ public class GroupController {
         List<Student> students = studentService.findStudentsByGroupNumber(number);
         model.addAttribute("students", students);
         return "group/students";
+    }
+
+    public void groupErrorsForNumberAndYear(BindingResult binding) {
+        binding.addError(new FieldError
+                ("group", "number", "Group already exist!!!"));
+        binding.addError(new FieldError
+                ("group", "yearOfCreate", "Group already exist!!!"));
     }
 }
