@@ -67,11 +67,12 @@ public class GroupController {
         return "redirect:/groups/";
     }
 
-    @GetMapping("/search/{id}")
-    public String searchStudentsByGroup(@PathVariable("id") Integer id, Model model) {
+
+    @GetMapping("/{id}/students")
+    public String showStudentsByGroup(@PathVariable("id") Integer id, Model model) {
         String number = groupService.findById(id).getNumber();
         List<Student> students = studentService.findStudentsByGroupNumber(number);
         model.addAttribute("students", students);
-        return "student/list-students";
+        return "group/students";
     }
 }
