@@ -8,9 +8,9 @@
 <body>
 <header th:insert = "blocks/header::header"></header>
 </header>
-    <div th:switch="${groups}">
-        <h2 th:case="null">No groups found!</h2>
-        <div th:case="*">
+    <div th:switch="${groups.isEmpty()}">
+        <h2 th:case="true">No groups found!</h2>
+        <div th:case="false">
             <h2>Groups</h2>
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
@@ -39,7 +39,7 @@
                     </div>
                     <td><a th:href="@{/groups/delete/{id}(id=${group.id})}" class="py-0 btn btn-primary">Delete</a></td>
                     <td><a th:href="@{/groups/update/{id}(id=${group.id})}" class="py-0 btn btn-primary">Update</a></td>
-                    <td><a th:href="@{/groups/search/{id}(id=${group.id})}" class="py-0 btn btn-primary">Show</a></td>
+                    <td><a th:href="@{/groups/{id}/students(id=${group.id})}" class="py-0 btn btn-primary">Show</a></td>
                 </tr>
                 </tbody>
             </table>
