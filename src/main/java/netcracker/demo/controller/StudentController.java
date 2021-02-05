@@ -27,8 +27,30 @@ public class StudentController {
     public String showStudents(Model model) {
         List<Student> students = studentService.findAll();
         model.addAttribute("students", students);
+        List<Object> numbers = groupService.findNumbersAllGroups();
+        model.addAttribute("numbers", numbers);
         return "student/list-students";
     }
+    @PostMapping("/")
+        public String searchStudent(Student student, Model model) {
+            String name = student.getName();
+            String number = student.getGroup().getNumber();
+            List<Student> students = null;
+            if (number.isEmpty() && !name.isEmpty()) {
+                students = studentService.findStudentsByName(name);
+            }
+            if (name.isEmpty() && !number.isEmpty()) {
+                students = studentService.findStudentsByGroupNumber(number);
+            }
+            if ((!name.isEmpty() && !number.isEmpty())
+                    ||(name.isEmpty() && number.isEmpty())) {
+                students = studentService.findStudentsByNameAndGroupNumber(name, number);
+            }
+
+            model.addAttribute("students", students);
+            return "student/search-students";
+        }
+
 
     @GetMapping("/create")
     public String createStudentForm(Student student, Model model) {
@@ -67,25 +89,6 @@ public class StudentController {
         student.setGroup(group);
         studentService.save(student);
         return "redirect:/students/";
-    }
-
-    @PostMapping("/search")
-    public String searchStudent(Student student, Model model) {
-        String name = student.getName();
-        String number = student.getGroup().getNumber();
-        if (number.isEmpty() && !name.isEmpty()) {
-            List<Student> students = studentService.findStudentsByName(name);
-            model.addAttribute("students", students);
-            return "student/list-students";
-        }
-        if (name.isEmpty() && !number.isEmpty()) {
-            List<Student> students = studentService.findStudentsByGroupNumber(number);
-            model.addAttribute("students", students);
-            return "student/list-students";
-        }
-        List<Student> students = studentService.findStudentsByNameAndGroupNumber(name, number);
-        model.addAttribute("students", students);
-        return "student/list-students";
     }
 
     @GetMapping("/search")

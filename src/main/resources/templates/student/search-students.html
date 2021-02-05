@@ -7,17 +7,34 @@
 </head>
 <body>
 <header th:insert = "blocks/header::header"></header>
-<form action="#" th:action="@{/students/search}" th:object="${student}" method="post">
-    <label for="name">Name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="Enter name">
+<div th:switch="${students.isEmpty()}">
+    <h2 th:case="true">No students found!</h2>
+    <div th:case="false">
+        <h2>Students</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Group</th>
+                <th>Date of enrollment</th>
+                <th>Delete student</th>
+                <th>Update student</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.group.number}"></td>
+                <td th:text="${student.dateOfEnrollment}"></td>
+                <td><a th:href="@{/students/delete/{id}(id=${student.id})}" class="py-0 btn btn-success">Delete</a></td>
+                <td><a th:href="@{/students/update/{id}(id=${student.id})}" class="py-0 btn btn-success">Update</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <br>
-    <select th:field="*{group.number}">
-        <option value="">Number of group</option>
-        <option th:each="number : ${numbers}" th:value="${number}" th:text="${number}"></option>
-    </select>
-    <!--<td><a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-secondary my-2">Delete</a></td>-->
-    <input type="submit" class="py-1 btn btn-success" value="Search student">
-</form>
+    <a href="/students/" class="py-1 btn btn-success">Back</a>
 <footer th:insert="blocks/footer::footer"></footer>
+</div>
 </body>
 </html>
