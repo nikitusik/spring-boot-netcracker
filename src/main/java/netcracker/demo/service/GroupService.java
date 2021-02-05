@@ -25,12 +25,16 @@ public class GroupService {
         return groupRepository.findByNumber(number);
     }
 
+    public Group findByNumberAndYear(String number, String year){
+        return groupRepository.findByNumberAndYearOfCreate(number, year);
+    }
+
     public Group findById(Integer id) {
         return groupRepository.findById(id).orElse(null);
     }
 
-    public void delete(Group group) {
-        groupRepository.delete(group);
+    public void deleteById(Integer id) {
+        groupRepository.deleteById(id);
     }
 
     public void save(Group group) {
