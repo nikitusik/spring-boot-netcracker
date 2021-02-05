@@ -12,7 +12,9 @@
 <div class = "container mt-5 mb-5">
     <h1>Search student</h1>
     <form action="/students/" method="post">
-     <input type = "text" name ="name" placeholder="Enter name" class="form-control">
+        <input type = "text" name ="name" placeholder="Enter name" class="form-control">
+        <br>
+        <input type = "text" name ="group.yearOfCreate" placeholder="Enter year of group create" class="form-control">
         <br>
         <select name="group.number">
             <option value="">Choose group</option>
@@ -39,7 +41,7 @@
             <tbody>
             <tr th:each="student : ${students}">
                 <td th:text="${student.name}"></td>
-                <td th:text="${student.group.number}"></td>
+                <td th:text="${'Group: ' + student.group.number +' Year: '+student.group.yearOfCreate}"></td>
                 <td th:text="${student.dateOfEnrollment}"></td>
                 <td><a th:href="@{/students/delete/{id}(id=${student.id})}" class="py-0 btn btn-success">Delete</a></td>
                 <td><a th:href="@{/students/update/{id}(id=${student.id})}" class="py-0 btn btn-success">Update</a></td>
