@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS public.groups
     faculty character varying not null,
     year_of_create character varying not null,
     is_archive boolean not null,
-    CONSTRAINT groups_pkey PRIMARY KEY (id)
+    CONSTRAINT groups_pkey PRIMARY KEY (id),
+    CONSTRAINT group_number UNIQUE (number,year_of_create)
 );
 CREATE TABLE IF NOT EXISTS public.students
 (
