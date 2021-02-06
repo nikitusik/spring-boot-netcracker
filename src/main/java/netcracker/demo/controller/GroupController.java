@@ -65,7 +65,7 @@ public class GroupController {
     @GetMapping("/{id}/students")
     public String showStudentsByGroup(@PathVariable("id") Integer id, Model model) {
         String number = groupService.findById(id).getNumber();
-        List<Student> students = studentService.findStudentsByGroupNumber(number);
+        List<Student> students = studentService.findStudentsByGroupId(id);
         model.addAttribute("students", students);
         return "group/students";
     }

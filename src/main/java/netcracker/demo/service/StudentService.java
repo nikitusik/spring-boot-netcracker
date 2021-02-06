@@ -42,4 +42,7 @@ public class StudentService {
     public List<Student> findStudentsByNameAndGroupNumber(String name, String number) {
         return studentRepository.findStudentsByNameAndGroup_Number(name, number);
     }
+    public List<Student> findStudentsByGroupId(int id){
+        return studentRepository.findStudentsByGroupId(id);
+    }
 }
