@@ -6,13 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Integer> {
 
     Group findByNumber(String number);
 
-    @Query(value = "SELECT number FROM groups ", nativeQuery = true)
+    Group findByNumberAndYearOfCreate(String number, String year);
+
+    @Query(value = "SELECT DISTINCT number FROM groups ", nativeQuery = true)
     List<Object> findNumbersAllGroups();
 }

@@ -7,8 +7,11 @@ import netcracker.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -31,25 +34,27 @@ public class StudentController {
         model.addAttribute("numbers", numbers);
         return "student/list-students";
     }
-    @PostMapping("/")
-        public String searchStudent(Student student, Model model) {
-            String name = student.getName();
-            String number = student.getGroup().getNumber();
-            List<Student> students = null;
-            if (number.isEmpty() && !name.isEmpty()) {
-                students = studentService.findStudentsByName(name);
-            }
-            if (name.isEmpty() && !number.isEmpty()) {
-                students = studentService.findStudentsByGroupNumber(number);
-            }
-            if ((!name.isEmpty() && !number.isEmpty())
-                    ||(name.isEmpty() && number.isEmpty())) {
-                students = studentService.findStudentsByNameAndGroupNumber(name, number);
-            }
 
-            model.addAttribute("students", students);
-            return "student/search-students";
-        }
+    @GetMapping("/search")
+    public String searchStudentsByGroupForm(Student student, Model model) {
+        List<Object> numbers = groupService.findNumbersAllGroups();
+        model.addAttribute("numbers", numbers);
+        return "student/search-students";
+    }
+
+    @PostMapping("/")
+    public String searchStudent(Student student, Model model) {
+        String number = student.getGroup().getNumber();
+        String year = student.getGroup().getYearOfCreate();
+        Group group = groupService.findByNumberAndYear(number, year);
+        List<Student> students;
+        if (group == null || student.getName() == null)
+            students = null;
+        else
+            students = studentService.findStudentsByGroupId(group.getId());
+        model.addAttribute("students", students);
+        return "student/search-students";
+    }
 
 
     @GetMapping("/create")
@@ -60,8 +65,16 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public String createStudent(Student student) {
-        Group group = groupService.findByNumber(student.getGroup().getNumber());
+    public String createStudent(@Valid Student student, BindingResult bindingResult, Model model) {
+        List<Object> numbers = groupService.findNumbersAllGroups();
+        String numberGroup = student.getGroup().getNumber();
+        String yearGroup = student.getGroup().getYearOfCreate();
+        Group group = groupService.findByNumberAndYear(numberGroup, yearGroup);
+        if (group == null) groupErrorsForNumberAndYear(bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("numbers", numbers);
+            return "student/create-student";
+        }
         student.setGroup(group);
         studentService.save(student);
         return "redirect:/students/";
@@ -69,8 +82,7 @@ public class StudentController {
 
     @GetMapping("/delete/{id}")
     public String deleteStudent(@PathVariable("id") Integer id) {
-        Student student = studentService.findById(id);
-        studentService.delete(student);
+        studentService.deleteById(id);
         return "redirect:/students/";
     }
 
@@ -84,17 +96,25 @@ public class StudentController {
     }
 
     @PostMapping("/update")
-    public String updateStudent(Student student) {
-        Group group = groupService.findByNumber(student.getGroup().getNumber());
+    public String updateStudent(@Valid Student student, BindingResult bindingResult, Model model) {
+        List<Object> numbers = groupService.findNumbersAllGroups();
+        String numberGroup = student.getGroup().getNumber();
+        String yearGroup = student.getGroup().getYearOfCreate();
+        Group group = groupService.findByNumberAndYear(numberGroup, yearGroup);
+        if (group == null) groupErrorsForNumberAndYear(bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("numbers", numbers);
+            return "student/update-student";
+        }
         student.setGroup(group);
         studentService.save(student);
         return "redirect:/students/";
     }
 
-    @GetMapping("/search")
-    public String searchStudentsByGroupForm(Student student, Model model) {
-        List<Object> numbers = groupService.findNumbersAllGroups();
-        model.addAttribute("numbers", numbers);
-        return "student/search-students";
+    public void groupErrorsForNumberAndYear(BindingResult binding) {
+        binding.addError(new FieldError
+                ("student", "group.number", "incorrect number group"));
+        binding.addError(new FieldError
+                ("student", "group.yearOfCreate", "incorrect year group"));
     }
 }

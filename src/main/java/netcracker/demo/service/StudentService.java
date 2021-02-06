@@ -28,8 +28,8 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public void delete(Student student) {
-        studentRepository.delete(student);
+    public void deleteById(Integer id) {
+        studentRepository.deleteById(id);
     }
 
     public List<Student> findStudentsByGroupNumber(String number) {
@@ -42,7 +42,12 @@ public class StudentService {
     public List<Student> findStudentsByNameAndGroupNumber(String name, String number) {
         return studentRepository.findStudentsByNameAndGroup_Number(name, number);
     }
-    public List<Student> findStudentsByGroupId(int id){
-        return studentRepository.findStudentsByGroupId(id);
+
+    public List<Student> findStudentsByGroupId(Integer id){
+        return studentRepository.findStudentsByGroup_Id(id);
+    }
+
+    public List<Student> findStudentsByNameAndGroupId(String name, Integer id) {
+        return studentRepository.findStudentsByNameAndGroup_Id(name, id);
     }
 }

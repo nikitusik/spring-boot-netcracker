@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Search students</title>
+</head>
+<body>
+<header th:insert = "blocks/header::header"></header>
+<div th:switch="${allUsers == null}">
+    <h2 th:case="true">No users found!</h2>
+    <div th:case="false">
+        <h2>Users</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>Password</th>
+                <th>Roles</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${allUsers}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:each="role:${user.roles}" th:text="*{role.name}" ></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <a href="/" class="py-1 btn btn-success">Back</a>
+    <footer th:insert="blocks/footer::footer"></footer>
+</div>
+</body>
+</html>

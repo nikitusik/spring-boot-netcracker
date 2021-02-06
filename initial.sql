@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS public.groups
     faculty character varying not null,
     year_of_create character varying not null,
     is_archive boolean not null,
-    CONSTRAINT groups_pkey PRIMARY KEY (id)
+    CONSTRAINT groups_pkey PRIMARY KEY (id),
+    CONSTRAINT group_number UNIQUE (number,year_of_create)
 );
 CREATE TABLE IF NOT EXISTS public.students
 (
@@ -16,3 +17,32 @@ CREATE TABLE IF NOT EXISTS public.students
     CONSTRAINT "FK_GROUP" FOREIGN KEY (group_id) REFERENCES groups(id),
     CONSTRAINT students_pkey PRIMARY KEY (id)
 );
+create table t_role
+(
+    id bigint not null
+        constraint t_role_pkey
+            primary key,
+    name varchar(255)
+);
+create table t_user
+(
+    id bigserial not null
+        constraint t_user_pkey
+            primary key,
+    password varchar(255),
+    username varchar(255)
+);
+create table t_user_roles
+(
+    user_id  bigint not null
+        constraint user_fk
+            references t_user,
+    roles_id bigint not null
+        constraint role_fk
+            references t_role,
+    constraint t_user_roles_pkey
+        primary key (user_id, roles_id)
+);
+INSERT INTO t_role(id, name) VALUES (1, 'ROLE_USER'), (2, 'ROLE_ADMIN');
+INSERT INTO t_user(password, username) VALUES ('$2a$10$HTfQosB9rwsM3iG7H.rX6efnVbIHJknj.MzbT6ILZPD9JXbVggxuG', 'admin');
+INSERT INTO t_user_roles(user_id, roles_id) VALUES (1, 2);

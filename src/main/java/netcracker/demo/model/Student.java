@@ -1,6 +1,8 @@
 package netcracker.demo.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
@@ -12,9 +14,11 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty
     @Column(name = "name")
     private String name;
 
+    @NotNull
     @Column(name = "date_of_enrollment")
     private Date dateOfEnrollment;
 

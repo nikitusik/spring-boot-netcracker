@@ -10,12 +10,15 @@
 <form action="#" th:action="@{/groups/create}" th:object="${group}" method="post">
     <label for="number">Number of group</label>
     <input type="text" th:field="*{number}" id="number" placeholder="Enter number">
+    <div style="color:red" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Number Error</div>
     <br>
     <label for="faculty">Faculty of group</label>
     <input type="text" th:field="*{faculty}" id="faculty" placeholder="Enter faculty">
+    <div style="color:red" th:if="${#fields.hasErrors('faculty')}" th:errors="*{faculty}">Faculty Error</div>
     <br>
     <label for="yearOfCreate">Group creation year</label>
     <input type="text" th:field="*{yearOfCreate}" id="yearOfCreate" placeholder="Enter year">
+    <div style="color:red" th:if="${#fields.hasErrors('yearOfCreate')}" th:errors="*{yearOfCreate}">Year Error</div>
     <br>
     <label for="isArchive">Make the group archived</label>
     <input type="checkbox" th:field="*{archive}" id="isArchive">

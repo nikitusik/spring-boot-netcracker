@@ -7,8 +7,11 @@ import netcracker.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,15 +39,20 @@ public class GroupController {
     }
 
     @PostMapping("/create")
-    public String createGroup(Group group) {
+    public String createGroup(@Valid Group group, BindingResult bindingResult) {
+        String year = group.getYearOfCreate();
+        String number = group.getNumber();
+        if(groupService.findByNumberAndYear(number, year)!=null)
+            groupErrorsForNumberAndYear(bindingResult);
+        if (bindingResult.hasErrors())
+            return "group/create-group";
         groupService.save(group);
         return "redirect:/groups/";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteGroup(@PathVariable("id") Integer id) {
-        Group group = groupService.findById(id);
-        groupService.delete(group);
+        groupService.deleteById(id);
         return "redirect:/groups/";
     }
 
@@ -56,7 +64,13 @@ public class GroupController {
     }
 
     @PostMapping("/update")
-    public String updateGroup(Group group) {
+    public String updateGroup(@Valid Group group, BindingResult bindingResult) {
+        String year = group.getYearOfCreate();
+        String number = group.getNumber();
+        if(groupService.findByNumberAndYear(number, year)!=null)
+            groupErrorsForNumberAndYear(bindingResult);
+        if (bindingResult.hasErrors())
+            return "group/update-group";
         groupService.save(group);
         return "redirect:/groups/";
     }
@@ -64,9 +78,15 @@ public class GroupController {
 
     @GetMapping("/{id}/students")
     public String showStudentsByGroup(@PathVariable("id") Integer id, Model model) {
-        String number = groupService.findById(id).getNumber();
         List<Student> students = studentService.findStudentsByGroupId(id);
         model.addAttribute("students", students);
         return "group/students";
+    }
+
+    public void groupErrorsForNumberAndYear(BindingResult binding) {
+        binding.addError(new FieldError
+                ("group", "number", "Group already exist!!!"));
+        binding.addError(new FieldError
+                ("group", "yearOfCreate", "Group already exist!!!"));
     }
 }
