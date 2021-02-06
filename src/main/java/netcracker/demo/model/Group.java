@@ -2,7 +2,7 @@ package netcracker.demo.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.sql.Date;
+
 
 @Entity
 @Table(name = "groups")

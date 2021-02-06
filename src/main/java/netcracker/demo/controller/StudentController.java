@@ -51,7 +51,7 @@ public class StudentController {
         if (group == null || student.getName() == null)
             students = null;
         else
-            students = studentService.findStudentsByNameAndGroupId(student.getName(), group.getId());
+            students = studentService.findStudentsByGroupId(group.getId());
         model.addAttribute("students", students);
         return "student/search-students";
     }
@@ -101,6 +101,7 @@ public class StudentController {
         String numberGroup = student.getGroup().getNumber();
         String yearGroup = student.getGroup().getYearOfCreate();
         Group group = groupService.findByNumberAndYear(numberGroup, yearGroup);
+        if (group == null) groupErrorsForNumberAndYear(bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("numbers", numbers);
             return "student/update-student";
