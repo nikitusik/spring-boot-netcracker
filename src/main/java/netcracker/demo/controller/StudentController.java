@@ -44,6 +44,7 @@ public class StudentController {
 
     @PostMapping("/")
     public String searchStudent(Student student, Model model) {
+        String name = student.getName();
         String number = student.getGroup().getNumber();
         String year = student.getGroup().getYearOfCreate();
         Group group = groupService.findByNumberAndYear(number, year);
@@ -51,7 +52,7 @@ public class StudentController {
         if (group == null || student.getName() == null)
             students = null;
         else
-            students = studentService.findStudentsByGroupId(group.getId());
+            students = studentService.findStudentsByNameAndGroupId(name, group.getId());
         model.addAttribute("students", students);
         return "student/search-students";
     }
