@@ -6,24 +6,25 @@
     <title>List students</title>
 </head>
 <body>
-<header th:insert = "blocks/header::header"></header>
+<header th:insert="blocks/header::header"></header>
 
 
-<div class = "container mt-5 mb-5">
-    <h1>Search student</h1>
+<div class="container">
+    <h3>Search student</h3>
     <form action="/students/" method="post">
-        <input type = "text" name ="name" placeholder="Enter name" class="form-control">
-        <br>
-        <input type = "text" name ="group.yearOfCreate" placeholder="Enter year of group create" class="form-control">
-        <br>
-        <select name="group.number">
-            <option value="">Choose group</option>
-            <option th:each="number : ${numbers}" th:value="${number}" th:text="${number}">
-        </select>
-        <button type = "submit" class ="btn btn-success">Search</button>
+        <div class="form-inline">
+            <input type="text" name="name" placeholder="Enter name" class="form-control mb-2 mr-sm-2">
+            <input type="text" name="group.yearOfCreate" placeholder="Enter year of group"
+                   class="form-control mb-2 mr-sm-1">
+            <select name="group.number" class="custom-select mb-2 mr-sm-2">
+                <option value="">Choose group</option>
+                <option th:each="number : ${numbers}" th:value="${number}" th:text="${number}">
+            </select>
+            <button type="submit" class="btn btn-outline-success mb-2">Search</button>
+        </div>
     </form>
-
 </div>
+
 <div th:switch="${students.isEmpty()}">
     <h2 th:case="true">No students found!</h2>
     <div th:case="false">
@@ -48,12 +49,12 @@
             </tr>
             </tbody>
         </table>
-        </div>
+    </div>
     <br>
-        <a href="/students/create" class="py-1 btn btn-success">Create student</a>
-        <a href="/groups/" class="py-1 btn btn-success">Groups</a>
-        <a href="/" class="py-1 btn btn-success">Main page</a>
+    <a href="/students/create" class="py-1 btn btn-success">Create student</a>
+    <a href="/groups/" class="py-1 btn btn-success">Groups</a>
+    <a href="/" class="py-1 btn btn-success">Main page</a>
 </div>
-<footer th:insert = "blocks/footer::footer"></footer>
+<footer th:insert="blocks/footer::footer"></footer>
 </body>
 </html>

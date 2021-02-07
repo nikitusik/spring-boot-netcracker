@@ -25,7 +25,7 @@
             <tbody>
             <tr th:each="student : ${students}">
                 <td th:text="${student.name}"></td>
-                <td th:text="${student.group.number}"></td>
+                <td th:text="${'Group: ' + student.group.number +' Year: '+student.group.yearOfCreate}"></td>
                 <td th:text="${student.dateOfEnrollment}"></td>
                 <td><a th:href="@{/students/delete/{id}(id=${student.id})}" class="py-0 btn btn-success">Delete</a></td>
                 <td><a th:href="@{/students/update/{id}(id=${student.id})}" class="py-0 btn btn-success">Update</a></td>
