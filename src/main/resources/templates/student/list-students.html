@@ -41,11 +41,11 @@
             </thead>
             <tbody>
             <tr th:each="student : ${students}">
-                <td th:text="${student.name}"></td>
-                <td th:text="${'Group: ' + student.group.number +' Year: '+student.group.yearOfCreate}"></td>
-                <td th:text="${student.dateOfEnrollment}"></td>
-                <td><a th:href="@{/students/delete/{id}(id=${student.id})}" class="py-0 btn btn-success">Delete</a></td>
-                <td><a th:href="@{/students/update/{id}(id=${student.id})}" class="py-0 btn btn-success">Update</a></td>
+                <td th:text="${student.getName}">Name</td>
+                <td th:text="${student.getGroupName}">Group</td>
+                <td th:text="${student.getDateOfEnrollment}">Date</td>
+                <td><a th:href="@{/students/delete/{id}(id=${student.getId})}" class="py-0 btn btn-success">Delete</a></td>
+                <td><a th:href="@{/students/update/{id}(id=${student.getId})}" class="py-0 btn btn-success">Update</a></td>
             </tr>
             </tbody>
         </table>

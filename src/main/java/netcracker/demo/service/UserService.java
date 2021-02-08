@@ -1,5 +1,6 @@
 package netcracker.demo.service;
 
+import netcracker.demo.dto.UserDTO;
 import netcracker.demo.model.Role;
 import netcracker.demo.model.User;
 import netcracker.demo.repository.RoleRepository;
@@ -30,8 +31,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    public List<User> allUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> allUsers() {
+        return userRepository.findUsers();
     }
 
     public boolean saveUser(User user) {

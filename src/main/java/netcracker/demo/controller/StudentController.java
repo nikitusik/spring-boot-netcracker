@@ -1,5 +1,6 @@
 package netcracker.demo.controller;
 
+import netcracker.demo.dto.StudentDTO;
 import netcracker.demo.model.Group;
 import netcracker.demo.model.Student;
 import netcracker.demo.service.GroupService;
@@ -9,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -28,16 +32,16 @@ public class StudentController {
 
     @GetMapping("/")
     public String showStudents(Model model) {
-        List<Student> students = studentService.findAll();
+        List<StudentDTO> students = studentService.findStudents();
         model.addAttribute("students", students);
-        List<Object> numbers = groupService.findNumbersAllGroups();
+        List<String> numbers = groupService.findNumbersAllGroups();
         model.addAttribute("numbers", numbers);
         return "student/list-students";
     }
 
     @GetMapping("/search")
     public String searchStudentsByGroupForm(Student student, Model model) {
-        List<Object> numbers = groupService.findNumbersAllGroups();
+        List<String> numbers = groupService.findNumbersAllGroups();
         model.addAttribute("numbers", numbers);
         return "student/search-students";
     }
@@ -60,14 +64,14 @@ public class StudentController {
 
     @GetMapping("/create")
     public String createStudentForm(Student student, Model model) {
-        List<Object> numbers = groupService.findNumbersAllGroups();
+        List<String> numbers = groupService.findNumbersAllGroups();
         model.addAttribute("numbers", numbers);
         return "student/create-student";
     }
 
     @PostMapping("/create")
     public String createStudent(@Valid Student student, BindingResult bindingResult, Model model) {
-        List<Object> numbers = groupService.findNumbersAllGroups();
+        List<String> numbers = groupService.findNumbersAllGroups();
         String numberGroup = student.getGroup().getNumber();
         String yearGroup = student.getGroup().getYearOfCreate();
         Group group = groupService.findByNumberAndYear(numberGroup, yearGroup);
@@ -90,7 +94,7 @@ public class StudentController {
     @GetMapping("/update/{id}")
     public String updateStudentForm(@PathVariable("id") Integer id, Model model) {
         Student student = studentService.findById(id);
-        List<Object> numbers = groupService.findNumbersAllGroups();
+        List<String> numbers = groupService.findNumbersAllGroups();
         model.addAttribute("student", student);
         model.addAttribute("numbers", numbers);
         return "student/update-student";
@@ -98,7 +102,7 @@ public class StudentController {
 
     @PostMapping("/update")
     public String updateStudent(@Valid Student student, BindingResult bindingResult, Model model) {
-        List<Object> numbers = groupService.findNumbersAllGroups();
+        List<String> numbers = groupService.findNumbersAllGroups();
         String numberGroup = student.getGroup().getNumber();
         String yearGroup = student.getGroup().getYearOfCreate();
         Group group = groupService.findByNumberAndYear(numberGroup, yearGroup);
