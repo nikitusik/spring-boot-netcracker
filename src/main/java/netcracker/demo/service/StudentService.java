@@ -1,5 +1,6 @@
 package netcracker.demo.service;
 
+import netcracker.demo.dto.StudentDTO;
 import netcracker.demo.model.Student;
 import netcracker.demo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,6 @@ public class StudentService {
     @Autowired
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
-    }
-
-    public List<Student> findAll() {
-        return studentRepository.findAll();
     }
 
     public Student findById(Integer id) {
@@ -35,7 +32,8 @@ public class StudentService {
     public List<Student> findStudentsByGroupNumber(String number) {
         return studentRepository.findStudentsByGroup_Number(number);
     }
-    public List<Student> findStudentsByName(String name){
+
+    public List<Student> findStudentsByName(String name) {
         return studentRepository.findStudentsByName(name);
     }
 
@@ -43,11 +41,15 @@ public class StudentService {
         return studentRepository.findStudentsByNameAndGroup_Number(name, number);
     }
 
-    public List<Student> findStudentsByGroupId(Integer id){
+    public List<Student> findStudentsByGroupId(Integer id) {
         return studentRepository.findStudentsByGroup_Id(id);
     }
 
     public List<Student> findStudentsByNameAndGroupId(String name, Integer id) {
         return studentRepository.findStudentsByNameAndGroup_Id(name, id);
+    }
+
+    public List<StudentDTO> findStudents() {
+        return studentRepository.findStudents();
     }
 }

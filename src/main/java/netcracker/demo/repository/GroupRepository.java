@@ -15,5 +15,5 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
     Group findByNumberAndYearOfCreate(String number, String year);
 
     @Query(value = "SELECT DISTINCT number FROM groups ", nativeQuery = true)
-    List<Object> findNumbersAllGroups();
+    List<String> findNumbersAllGroups();
 }

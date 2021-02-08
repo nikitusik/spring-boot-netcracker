@@ -41,7 +41,7 @@ public class GroupService {
         groupRepository.save(group);
     }
 
-    public List<Object> findNumbersAllGroups() {
+    public List<String> findNumbersAllGroups() {
         return groupRepository.findNumbersAllGroups();
     }
 }
