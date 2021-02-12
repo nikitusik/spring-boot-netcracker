@@ -4,6 +4,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>Update Group</title>
+    <style type="text/css">
+        #footer {
+            position: fixed;
+            left: 0; bottom: 0;
+        }
+    </style>
+
 </head>
 <body>
 <header th:insert = "blocks/header::header"></header>
@@ -29,6 +36,8 @@
     <input type="submit" class="py-1 btn btn-primary "value="Update Group">
 </form>
 <a href="/groups/" class="py-1 btn btn-primary">Back</a>
-<footer th:insert = "blocks/footer::footer"></footer>
+<div id="footer">
+    <footer th:insert = "blocks/footer::footer"></footer>
+</div>
 </body>
 </html>

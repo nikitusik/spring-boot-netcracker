@@ -4,6 +4,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>List students</title>
+    <style type="text/css">
+        #footer {
+            position: fixed; /* Фиксированное положение */
+            left: 0; bottom: 0; /* Левый нижний угол */
+        }
+    </style>
+
 </head>
 <body>
 <header th:insert = "blocks/header::header"></header>
@@ -39,6 +46,8 @@
     <a href="/" class="py-1 btn btn-success">Main page</a>
 
 </div>
-<footer th:insert = "blocks/footer::footer"></footer>
+<div id="footer">
+    <footer th:insert = "blocks/footer::footer"></footer>
+</div>
 </body>
 </html>
