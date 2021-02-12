@@ -1,5 +1,6 @@
 package netcracker.demo.controller;
 
+import netcracker.demo.dto.GroupDTO;
 import netcracker.demo.dto.StudentDTO;
 import netcracker.demo.model.Group;
 import netcracker.demo.model.Student;
@@ -33,32 +34,25 @@ public class StudentController {
     @GetMapping("/")
     public String showStudents(Model model) {
         List<StudentDTO> students = studentService.findStudents();
+        if (students.size()==0)
+            students = null;
+        else{
+            List<GroupDTO> numbers = groupService.findNumbersAndYearAllGroups();
+            model.addAttribute("numbers", numbers);
+            model.addAttribute("isBack", false);
+        }
         model.addAttribute("students", students);
-        List<String> numbers = groupService.findNumbersAllGroups();
-        model.addAttribute("numbers", numbers);
         return "student/list-students";
     }
 
-    @GetMapping("/search")
-    public String searchStudentsByGroupForm(Student student, Model model) {
-        List<String> numbers = groupService.findNumbersAllGroups();
-        model.addAttribute("numbers", numbers);
-        return "student/search-students";
-    }
-
     @PostMapping("/")
-    public String searchStudent(Student student, Model model) {
+    public String searchStudent(StudentDTO student, Model model) {
         String name = student.getName();
-        String number = student.getGroup().getNumber();
-        String year = student.getGroup().getYearOfCreate();
-        Group group = groupService.findByNumberAndYear(number, year);
-        List<Student> students;
-        if (group == null || student.getName() == null)
-            students = null;
-        else
-            students = studentService.findStudentsByNameAndGroupId(name, group.getId());
+        Integer groupId = student.getGroupId();
+        List<StudentDTO> students = studentService.findStudentsByNameAndGroupId(name, groupId);
+        model.addAttribute("isBack", true);
         model.addAttribute("students", students);
-        return "student/search-students";
+        return "student/list-students";
     }
 
 
