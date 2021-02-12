@@ -1,5 +1,6 @@
 package netcracker.demo.service;
 
+import netcracker.demo.dto.GroupDTO;
 import netcracker.demo.model.Group;
 import netcracker.demo.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,9 @@ public class GroupService {
 
     public List<String> findNumbersAllGroups() {
         return groupRepository.findNumbersAllGroups();
+    }
+
+    public List<GroupDTO> findNumbersAndYearAllGroups() {
+        return groupRepository.findNumbersAndYearAllGroups();
     }
 }

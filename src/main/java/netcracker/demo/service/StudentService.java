@@ -29,24 +29,12 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public List<Student> findStudentsByGroupNumber(String number) {
-        return studentRepository.findStudentsByGroup_Number(number);
-    }
-
-    public List<Student> findStudentsByName(String name) {
-        return studentRepository.findStudentsByName(name);
-    }
-
-    public List<Student> findStudentsByNameAndGroupNumber(String name, String number) {
-        return studentRepository.findStudentsByNameAndGroup_Number(name, number);
-    }
-
     public List<Student> findStudentsByGroupId(Integer id) {
         return studentRepository.findStudentsByGroup_Id(id);
     }
 
-    public List<Student> findStudentsByNameAndGroupId(String name, Integer id) {
-        return studentRepository.findStudentsByNameAndGroup_Id(name, id);
+    public List<StudentDTO> findStudentsByNameAndGroupId(String name, Integer id) {
+        return studentRepository.findStudentsByNameAndGroupId(name, id);
     }
 
     public List<StudentDTO> findStudents() {

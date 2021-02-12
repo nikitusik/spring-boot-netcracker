@@ -7,4 +7,5 @@ public interface StudentDTO {
     String getName();
     Date getDateOfEnrollment();
     String getGroupName();
+    Integer getGroupId();
 }
