@@ -52,6 +52,10 @@ public class GroupController {
 
     @GetMapping("/delete/{id}")
     public String deleteGroup(@PathVariable("id") Integer id) {
+        List<Student> students = studentService.findStudentsByGroupId(id);
+        if (students.size()!=0){
+            return "error/delete-group";
+        }
         groupService.deleteById(id);
         return "redirect:/groups/";
     }
