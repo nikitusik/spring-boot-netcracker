@@ -37,7 +37,7 @@
                                 <td th:text="Really"></td>
                             </div>
                     </div>
-                    <td><a href="@{/groups/delete/{id}(id=${group.id})}">Delete</a></td>
+                    <td><a th:href="@{/groups/delete/{id}(id=${group.id})}" class ="py-0 btn btn-primary">Delete</a></td>
                     <td><a th:href="@{/groups/update/{id}(id=${group.id})}" class="py-0 btn btn-primary">Update</a></td>
                     <td><a th:href="@{/groups/{id}/students(id=${group.id})}" class="py-0 btn btn-primary">Show</a></td>
                 </tr>
