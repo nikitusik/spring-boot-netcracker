@@ -1,27 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>List students</title>
-    <style type="text/css">
-
-        #footer {
-            position: fixed; /* Фиксированное положение */
-            left: 0; bottom: 0; /* Левый нижний угол */
-        }
-    </style>
 </head>
 <body>
 <header th:insert="blocks/header::header"></header>
-
-
 <div th:switch="${students == null OR students.isEmpty()}">
     <div th:case="true">
         <h2>No students found!</h2>
     </div>
     <div th:case="false">
-        <div class="container">
             <h3>Search student</h3>
             <form action="/students/" method="post">
                 <div class="form-inline">
@@ -69,9 +59,5 @@
             <a href="/students/" class="py-1 btn btn-warning">Back</a>
         </div>
     </div>
-</div>
-<div id="footer">
-    <footer th:insert = "blocks/footer::footer"></footer>
-</div>
 </body>
 </html>

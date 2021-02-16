@@ -4,13 +4,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>List groups</title>
-    <style type="text/css">
-        #footer {
-            position: fixed; /* Фиксированное положение */
-            left: 0; bottom: 0; /* Левый нижний угол */
-        }
-    </style>
-
 </head>
 <body>
 <header th:insert = "blocks/header::header"></header>
@@ -44,7 +37,7 @@
                                 <td th:text="Really"></td>
                             </div>
                     </div>
-                    <td><a th:href="@{/groups/delete/{id}(id=${group.id})}" class="py-0 btn btn-primary">Delete</a></td>
+                    <td><a href="@{/groups/delete/{id}(id=${group.id})}">Delete</a></td>
                     <td><a th:href="@{/groups/update/{id}(id=${group.id})}" class="py-0 btn btn-primary">Update</a></td>
                     <td><a th:href="@{/groups/{id}/students(id=${group.id})}" class="py-0 btn btn-primary">Show</a></td>
                 </tr>
@@ -56,8 +49,6 @@
         <a href="/groups/create" class="py-1 btn btn-primary">Create group</a>
         <a href="/students/" class="py-1 btn btn-primary">Students</a>
         <a href="/" class="py-1 btn btn-primary">Main page</a>
-<div id="footer">
-    <footer th:insert = "blocks/footer::footer"></footer>
 </div>
 </body>
 </html>
