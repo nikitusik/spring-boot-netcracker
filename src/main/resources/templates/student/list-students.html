@@ -32,6 +32,9 @@
                 <th>Name</th>
                 <th>Group</th>
                 <th>Date of enrollment</th>
+                <th>Date of birth</th>
+                <th>City</th>
+                <th>Number of room</th>
                 <th>Delete student</th>
                 <th>Update student</th>
             </tr>
@@ -41,6 +44,9 @@
                 <td th:text="${student.getName}">Name</td>
                 <td th:text="${student.getGroupName}">Group</td>
                 <td th:text="${student.getDateOfEnrollment}">Date</td>
+                <td th:text="${student.getDateOfBirth}">Date</td>
+                <td th:text="${student.getCity}">City</td>
+                <td th:text="${student.getRoomNumber}">Number of room</td>
                 <td><a th:href="@{/students/delete/{id}(id=${student.getId})}" class="py-0 btn btn-success">Delete</a>
                 </td>
                 <td><a th:href="@{/students/update/{id}(id=${student.getId})}" class="py-0 btn btn-success">Update</a>

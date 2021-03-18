@@ -8,4 +8,7 @@ public interface StudentDTO {
     Date getDateOfEnrollment();
     String getGroupName();
     Integer getGroupId();
+    String getCity();
+    Date getDateOfBirth();
+    Integer getRoomNumber();
 }

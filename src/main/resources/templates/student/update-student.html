@@ -21,6 +21,18 @@
     <div style="color:red" th:if="${#fields.hasErrors('dateOfEnrollment')}">Date Error</div>
     <br>
 
+    <label for="dateOfBirth">Date of birth</label>
+    <input type="date" th:field="*{dateOfBirth}" id="dateOfBirth" placeholder="Enter date">
+    <br>
+
+    <label for="city">City</label>
+    <input type="text" th:field="*{city}" id="city" placeholder="Enter city">
+    <br>
+
+    <label for="roomNumber">Number of room</label>
+    <input type="text" th:field="*{roomNumber}" id="roomNumber" placeholder="Enter number">
+    <br>
+
     <label for="number">Number of group</label>
     <select th:field="*{group.number}" id="number">
         <option value="">Select of group</option>

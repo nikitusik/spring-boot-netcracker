@@ -50,6 +50,8 @@ public class StudentController {
         String name = student.getName();
         Integer groupId = student.getGroupId();
         List<StudentDTO> students = studentService.findStudentsByNameAndGroupId(name, groupId);
+        List<GroupDTO> numbers = groupService.findNumbersAndYearAllGroups();
+        model.addAttribute("numbers", numbers);
         model.addAttribute("isBack", true);
         model.addAttribute("students", students);
         return "student/list-students";

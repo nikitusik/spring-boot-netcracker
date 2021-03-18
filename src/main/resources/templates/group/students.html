@@ -7,8 +7,10 @@
 </head>
 <body>
 <header th:insert = "blocks/header::header"></header></header>
-<div th:switch="${students.isEmpty()}">
-    <h2 th:case="true">No students found!</h2>
+<div th:switch="${students == null OR students.isEmpty()}">
+    <div th:case="true">
+        <h2>No students found!</h2>
+    </div>
     <div th:case="false">
         <h2>Students</h2>
         <table class="table table-bordered table-striped">
@@ -17,6 +19,9 @@
                 <th>Name</th>
                 <th>Group</th>
                 <th>Date of enrollment</th>
+                <th>Date of birth</th>
+                <th>City</th>
+                <th>Number of room</th>
                 <th>Delete student</th>
                 <th>Update student</th>
             </tr>
@@ -26,6 +31,9 @@
                 <td th:text="${student.name}"></td>
                 <td th:text="${'Group: ' + student.group.number +' Year: '+student.group.yearOfCreate}"></td>
                 <td th:text="${student.dateOfEnrollment}"></td>
+                <td th:text="${student.dateOfBirth}"></td>
+                <td th:text="${student.city}"></td>
+                <td th:text="${student.roomNumber}"></td>
                 <td><a th:href="@{/students/delete/{id}(id=${student.id})}" class="py-0 btn btn-success">Delete</a></td>
                 <td><a th:href="@{/students/update/{id}(id=${student.id})}" class="py-0 btn btn-success">Update</a></td>
             </tr>

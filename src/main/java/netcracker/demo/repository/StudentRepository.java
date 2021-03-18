@@ -16,6 +16,9 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query(value =
             "select s.id as id, " +
             "       g.id as groupId," +
+                    "       s.city as city," +
+                    "       s.dateOfBirth as dateOfBirth," +
+                    "       s.roomNumber as roomNumber," +
             "       s.name as name, " +
             "       concat('Group: ', g.number, ' Year: ', g.yearOfCreate) as groupName," +
             "       s.dateOfEnrollment as dateOfEnrollment " +
@@ -26,6 +29,9 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query(value =
             "select s.id as id, " +
             "       g.id as groupId," +
+                    "       s.city as city," +
+                    "       s.dateOfBirth as dateOfBirth," +
+                    "       s.roomNumber as roomNumber," +
             "       s.name as name, " +
             "       concat('Group: ', g.number, ' Year: ', g.yearOfCreate) as groupName," +
             "       s.dateOfEnrollment as dateOfEnrollment " +

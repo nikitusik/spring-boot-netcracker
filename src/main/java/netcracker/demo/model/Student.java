@@ -18,9 +18,22 @@ public class Student {
     @Column(name = "name")
     private String name;
 
+    @NotEmpty
+    @Column(name = "city")
+    private String city;
+
     @NotNull
     @Column(name = "date_of_enrollment")
     private Date dateOfEnrollment;
+
+    @NotNull
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
+
+
+    @NotNull
+    @Column(name = "room_number")
+    private int roomNumber;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "group_id")
@@ -60,6 +73,18 @@ public class Student {
     public void setDateOfEnrollment(Date dateOfEnrollment) {
         this.dateOfEnrollment = dateOfEnrollment;
     }
+
+    public String getCity() { return city; }
+
+    public void setCity(String city) { this.city = city; }
+
+    public Date getDateOfBirth() { return dateOfBirth; }
+
+    public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+
+    public int getRoomNumber() { return roomNumber; }
+
+    public void setRoomNumber(int roomNumber) { this.roomNumber = roomNumber; }
 
     public String toString() {
         return "Имя студента: " + name +
